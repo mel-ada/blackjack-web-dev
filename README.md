@@ -27,37 +27,30 @@ _List of specifications (specs) for the completed goal. These are declarative se
 - [ ]  if player goes over 21, player busts
 - [ ] Backend Game Logic:
 - [ ]  Compare player total to dealer total, highest wins
-- [ ]  If player wins, players get their bet back, doubled
 - [ ]  Repeat until player chooses to stay:
 - [ ]  Player chooses to hit or stay
 - [ ]  If hits and bust (go over 21), automatically loses
 - [ ] New Features
-- [ ]  if player gets Blackjack right at the start (Natural), player wins
-- [ ]  Repeat hit or stay until player chooses to stay:
-- [ ]  Player chooses to hit or stay
-- [ ]  if player goes over 21, player busts
-- [ ] Backend Game Logic:
-- [ ]  Compare player total to dealer total, highest wins
-- [ ]  If player wins, players get their bet back, doubled
-- [ ]  Repeat until player chooses to stay:
-- [ ]  Player chooses to hit or stay
-- [ ]  If hits and bust (go over 21), automatically loses
-- [ ] New Features
-- [ ]  Betting
-- [ ]  Place a bet at the beginning of the hand.
-- [ ]  Handle bets for additional circumstances (double down, split, etc.)
 - [ ]  Multiple players
-- [ ]  Hot Seat Multiplayer
 - [ ]  AI Players
-- [ ]  New Game Rules
 - [ ]  Double Down
 - [ ]  Split/Resplit
-- [ ]  Insurance
 - [ ]  The artifact produced is properly licensed, preferably with the MIT license.
 - [ ] Game is playable in a web browser.
-- [ ] Game handles asynchronous player input
 - [ ] Game is saveable
-- [ ] Has an attractive UI.
+- [ ] Has an attractive UI. 
+- [ ] Use React to implement the project 
+
+##Stretch Goals:
+- [ ] Betting
+- [ ] If player wins, players get their bet back, doubled
+- [ ] Place a bet at the beginning of the hand.
+- [ ] Handle bets for additional circumstances (double down, split, etc.)
+- [ ] Hot Seat Multiplayer
+- [ ] Insurance
+
+
+
 ### Required
 
 _Do not remove these specs - they are required for all goals_.
