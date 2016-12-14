@@ -6,7 +6,7 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.js$/, include: [`${__dirname}/src`, `${__dirname}/client`], exclude: /node_modules/, loader: "babel-loader" }
+      { test: /\.js$/, include: [`${__dirname}/src`, `${__dirname}/client`, `${__dirname}/components`], exclude: /node_modules/, loader: "babel-loader" }
     ]
   }
 };
