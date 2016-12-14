@@ -21573,23 +21573,24 @@
 	var Card = function (_Component) {
 	  _inherits(Card, _Component);
 
-	  function Card() {
+	  function Card(props) {
 	    _classCallCheck(this, Card);
 
-	    return _possibleConstructorReturn(this, (Card.__proto__ || Object.getPrototypeOf(Card)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (Card.__proto__ || Object.getPrototypeOf(Card)).call(this, props));
+
+	    var _this$props = _this.props,
+	        suit = _this$props.suit,
+	        symbol = _this$props.symbol;
+	    return _this;
 	  }
 
 	  _createClass(Card, [{
 	    key: "render",
 	    value: function render() {
-	      var _props = this.props,
-	          suit = _props.suit,
-	          symbol = _props.symbol;
-
 	      return _react2.default.createElement(
 	        "div",
 	        null,
-	        props.suit
+	        this.props.suit
 	      );
 	    }
 	  }]);
@@ -21610,8 +21611,26 @@
 	});
 	var SUITS = [{ suit: "Spade", symbol: "♠️" }, { suit: "Club", symbol: "♣️" }, { suit: "Heart", symbol: "♥️" }, { suit: "Diamond", symbol: "♦️" }];
 
+	var SUITS_TO_SYMBOL = {
+	  spade: "♠️",
+	  club: "♣️",
+	  heart: "♥️",
+	  diamond: "♦️"
+	};
+
+	var SUITS_TO_NAME = {
+	  spade: "SPADE"
+	};
+
 	//makes values accessible to other files
 	exports.default = SUITS;
+
+
+	module.exports = {
+	  SUITS_TO_NAME: SUITS_TO_NAME,
+	  SUITS_TO_SYMBOL: SUITS_TO_SYMBOL,
+	  SUITS: SUITS
+	};
 
 /***/ }
 /******/ ]);
