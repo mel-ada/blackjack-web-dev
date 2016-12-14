@@ -1,10 +1,11 @@
 import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
+import Card from '../client/card'
 
-class HelloMessage extends Component {
+class BlackJack extends Component {
   render() {
-    return <div>{this.props.name}</div>
+    return <Card hand={this.props.name} />
   }
 }
 
-ReactDOM.render(<HelloMessage name={"BlackJack"} />, document.getElementById('root'))
+ReactDOM.render(<BlackJack name={"Cards"} />, document.getElementById('root'))

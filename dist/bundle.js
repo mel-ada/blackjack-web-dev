@@ -56,6 +56,10 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
+	var _card = __webpack_require__(178);
+
+	var _card2 = _interopRequireDefault(_card);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -64,30 +68,26 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var HelloMessage = function (_Component) {
-	  _inherits(HelloMessage, _Component);
+	var BlackJack = function (_Component) {
+	  _inherits(BlackJack, _Component);
 
-	  function HelloMessage() {
-	    _classCallCheck(this, HelloMessage);
+	  function BlackJack() {
+	    _classCallCheck(this, BlackJack);
 
-	    return _possibleConstructorReturn(this, (HelloMessage.__proto__ || Object.getPrototypeOf(HelloMessage)).apply(this, arguments));
+	    return _possibleConstructorReturn(this, (BlackJack.__proto__ || Object.getPrototypeOf(BlackJack)).apply(this, arguments));
 	  }
 
-	  _createClass(HelloMessage, [{
+	  _createClass(BlackJack, [{
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        this.props.name
-	      );
+	      return _react2.default.createElement(_card2.default, { hand: this.props.name });
 	    }
 	  }]);
 
-	  return HelloMessage;
+	  return BlackJack;
 	}(_react.Component);
 
-	_reactDom2.default.render(_react2.default.createElement(HelloMessage, { name: "BlackJack" }), document.getElementById('root'));
+	_reactDom2.default.render(_react2.default.createElement(BlackJack, { name: "Cards" }), document.getElementById('root'));
 
 /***/ },
 /* 1 */
@@ -21495,6 +21495,101 @@
 
 	module.exports = ReactDOMInvalidARIAHook;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 178 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _VALUES;
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	/*import React, {Component} from 'react'
+
+	export default class Card extends Component {
+	  render() {
+	    return <div>{this.props.hand}</div>
+	  }
+	}*/
+	var SPADES = '♠️';
+	var CLUBS = '♣️';
+	var HEARTS = '♥️';
+	var DIAMONDS = '♦️';
+	var JACK = 'J';
+	var QUEEN = 'Q';
+	var KING = 'K';
+	var ACE = 'A';
+
+	var SUITS = [SPADES, CLUBS, HEARTS, DIAMONDS];
+	var RANKS = [2, 3, 4, 5, 6, 7, 8, 9, 10, JACK, QUEEN, KING, ACE];
+	var VALUES = (_VALUES = {}, _defineProperty(_VALUES, JACK, 10), _defineProperty(_VALUES, QUEEN, 10), _defineProperty(_VALUES, KING, 10), _defineProperty(_VALUES, ACE, 1 || 11), _VALUES);
+
+	var Card = function () {
+	  function Card(rank, suit) {
+	    _classCallCheck(this, Card);
+
+	    this.suit = suit;
+	    this.rank = rank;
+	  }
+
+	  _createClass(Card, [{
+	    key: 'isAce',
+	    value: function isAce() {
+	      return this.rank === ACE;
+	    }
+	  }, {
+	    key: 'value',
+	    value: function value() {
+	      var value = '';
+	      if (this.rank > 1 && this.rank < 11) {
+	        value = this.rank;
+	        return value;
+	      } else if (this.rank === ACE) {
+	        value = 11;
+	        return value;
+	      } else {
+	        value = 10;
+	        return value;
+	      }
+	    }
+	  }, {
+	    key: 'toString',
+	    value: function toString() {
+	      return '' + this.rank + this.suit;
+	    }
+	  }]);
+
+	  return Card;
+	}();
+
+	Card.all = function () {
+	  var cards = [];
+	  SUITS.forEach(function (suit) {
+	    RANKS.forEach(function (rank) {
+	      cards.push(new Card(rank, suit));
+	    });
+	  });
+	  return cards;
+	};
+
+	Card.SUITS = SUITS;
+	Card.RANKS = RANKS;
+	Card.HEARTS = HEARTS;
+	Card.DIAMONDS = DIAMONDS;
+	Card.CLUBS = CLUBS;
+	Card.SPADES = SPADES;
+	Card.ACE = ACE;
+	Card.JACK = JACK;
+	Card.QUEEN = QUEEN;
+	Card.KING = KING;
+
+	module.exports = Card;
 
 /***/ }
 /******/ ]);
