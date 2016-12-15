@@ -1,16 +1,14 @@
 import React, {Component} from 'react'
 import SUITS from "../client/card"
+import Deck from '../client/deck'
 
 class Card extends Component {
-  constructor(props){
-    super(props)
-   
-  const {suit, symbol} = this.props
-  }
+
     render() {
+      // const {card} = this.props
       return (
-      	<div>{this.props.suit}</div>
-      )		
+      	<div></div>
+      )
     }
 }
 
