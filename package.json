@@ -4,8 +4,8 @@
   "description": "Create a blackjack to be played in a web browser based on the command line version available here: https://github.com/phoniks/BlackJack ## Context",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "webpack": "webpack && webpack-dev-server"
+    "start": "node ./src/index",
+    "webpack": "webpack && webpack-dev-server --inline --hot"
   },
   "repository": {
     "type": "git",

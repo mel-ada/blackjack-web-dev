@@ -23,4 +23,14 @@ export default class Deck {
 
 		this.shuffle()
 	}
+
+	createDeck(){
+		const deck = []
+		for(suit in SUITS){
+			for(rank in RANKS){
+				let symbol = SUITS_TO_SYMBOL[suit]
+				//let card = {suit: {suit}, rank:{rank}, symbol:{symbol}}
+			}
+		}
+	}
 }

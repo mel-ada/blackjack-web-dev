@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import Card from './card';
+import Deck from '../client/deckModel';
+import Card from './card.js';
 
 var buttonStyle = {
   margin: '10px 10px 10px 0'
@@ -9,11 +10,15 @@ var buttonStyle = {
 
 
 export default class Button extends Component {
+  constructor(props) {
+    super(props)
+  }
+
   render() {
+    //const deck = new Deck().map()
     return (
       <div>
-        {/* <Card suit={c.suit} symbol={c.symbol}/> */}
-        <Card />
+      <img src="../images/backOfCard.jpeg"/>
         <button
           className="btn btn-default"
           style={buttonStyle}
@@ -24,6 +29,7 @@ export default class Button extends Component {
             onClick={this.props.handleClick}>New Game</button>
 
       </div>
+
     );
   }
 }

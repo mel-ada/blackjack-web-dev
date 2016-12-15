@@ -1,5 +1,4 @@
 import Deck from './deck'
-import
 
 const WIN = 'win'
 const LOSE = 'lose'
