@@ -1,36 +1,37 @@
 import _ from 'lodash'
-
-import SUITS from './card'
-import RANKS from './rank'
+import {SUITS, RANKS} from './card'
 
 export default class Deck {
 	constructor(){
-		this.reset()
+		// this.reset()
+		this.createDeck = this.createDeck
 	}
 
 	shuffle(){
-		this.cards = _.shuffle(this.cards)
+		this.deck = _.shuffle(this.deck)
 	}
 
 	deal(){
-		return this.cards.pop()
+		return this.deck.pop()
 	}
 
-	reset(){
-		this.cards = SUITS.map(suit =>
-			RANKS.map(rank => Object.assign( {}, suit, rank ))
-		).reduce( (memo, array) => memo.concat( array ))
+	// reset(){
+	// 	this.cards = SUITS.map(suit =>
+	// 		RANKS.map(rank => Object.assign( {}, suit, rank ))
+	// 	).reduce( (memo, array) => memo.concat( array ))
 
-		this.shuffle()
-	}
+	// 	this.shuffle()
+	// }
 
 	createDeck(){
 		const deck = []
-		for(suit in SUITS){
-			for(rank in RANKS){
-				let symbol = SUITS_TO_SYMBOL[suit]
-				//let card = {suit: {suit}, rank:{rank}, symbol:{symbol}}
-			}
+		for(let suit of SUITS){
+		  for(let rank of RANKS){
+			deck.push({suit: suit.suit, rank: rank, symbol: suit.symbol})
+		  }
+
 		}
+		// console.log(deck)
+	  return _.shuffle(deck)	
 	}
 }

@@ -21,26 +21,27 @@ const RANKS = [
 	{ name: 'KING', value: 10 }
 ]
 
-const SUITS_TO_SYMBOL = {
-  spade: "♠️",
-  club:  "♣️",
-  heart: "♥️",
-  diamond: "♦️"
-}
+// const SUITS_TO_SYMBOL = {
+//   spade: "♠️",
+//   club:  "♣️",
+//   heart: "♥️",
+//   diamond: "♦️"
+// }
 
-const SUITS_TO_NAME = {
-  spade: "SPADE",
-  club: "CLUB",
-  heart: "HEART",
-  diamond: "DIAMOND"
-}
+// const SUITS_TO_NAME = {
+//   spade: "SPADE",
+//   club: "CLUB",
+//   heart: "HEART",
+//   diamond: "DIAMOND"
+// }
 
 
 //makes values accessible to other files
-export default SUITS
+// export default SUITS
 
 module.exports = {
-  SUITS_TO_NAME,
-  SUITS_TO_SYMBOL,
-  SUITS
+  // SUITS_TO_NAME,
+  // SUITS_TO_SYMBOL,
+  SUITS,
+  RANKS
 }
