@@ -21485,13 +21485,23 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _deckModel = __webpack_require__(179);
+	var _deck = __webpack_require__(179);
 
-	var _deckModel2 = _interopRequireDefault(_deckModel);
+	var _deck2 = _interopRequireDefault(_deck);
+
+	var _hand = __webpack_require__(183);
+
+	var _hand2 = _interopRequireDefault(_hand);
+
+	var _game = __webpack_require__(185);
+
+	var _game2 = _interopRequireDefault(_game);
+
+	var _player = __webpack_require__(186);
+
+	var _player2 = _interopRequireDefault(_player);
 
 	var _card = __webpack_require__(182);
-
-	var _card2 = _interopRequireDefault(_card);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21511,16 +21521,59 @@
 	  function Button(props) {
 	    _classCallCheck(this, Button);
 
-	    return _possibleConstructorReturn(this, (Button.__proto__ || Object.getPrototypeOf(Button)).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (Button.__proto__ || Object.getPrototypeOf(Button)).call(this, props));
+
+	    _this.deck = new _deck2.default().createDeck();
+	    return _this;
 	  }
 
 	  _createClass(Button, [{
+	    key: 'makeHand',
+	    value: function makeHand() {
+	      var hand = [];
+	      this.deck.forEach(function (card) {
+	        if (hand.length < 2) {
+	          hand.push(card);
+	        }
+	      });
+	      return hand;
+	    }
+	  }, {
+	    key: 'makePlayer',
+	    value: function makePlayer() {
+	      var player1 = [];
+	    }
+	  }, {
+	    key: 'hit',
+	    value: function hit() {
+	      //give player one more card
+	      //update hand value 
+	    }
+	  }, {
+	    key: 'switch',
+	    value: function _switch() {}
+	  }, {
 	    key: 'render',
 	    value: function render() {
-	      //const deck = new Deck().map()
 	      return _react2.default.createElement(
 	        'div',
 	        null,
+	        _react2.default.createElement(
+	          'button',
+	          {
+	            className: 'btn btn-default',
+	            style: buttonStyle,
+	            onClick: this.props.handleClick },
+	          'Hit'
+	        ),
+	        _react2.default.createElement(
+	          'button',
+	          {
+	            className: 'btn btn-default',
+	            style: buttonStyle,
+	            onClick: this.props.handleClick },
+	          'Stay'
+	        ),
 	        _react2.default.createElement('img', { src: '../images/backOfCard.jpeg' }),
 	        _react2.default.createElement(
 	          'button',
@@ -21537,7 +21590,9 @@
 	            style: buttonStyle,
 	            onClick: this.props.handleClick },
 	          'New Game'
-	        )
+	        ),
+	        _react2.default.createElement(_hand2.default, { hand: this.makeHand() }),
+	        _react2.default.createElement(_player2.default, { player: this.makePlayer() })
 	      );
 	    }
 	  }]);
@@ -21557,169 +21612,13 @@
 		value: true
 	});
 
-	var _CardModel = __webpack_require__(180);
-
-	var _CardModel2 = _interopRequireDefault(_CardModel);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var Deck = function Deck(suits, ranks) {
-		_classCallCheck(this, Deck);
-
-		console.log('Values', suits, ranks);
-		this.card = 'card';
-		for (var i = 0; i < suits.length; i++) {
-			for (var j = 0; j < ranks.length; j++) {
-				new Card(suits[i], ranks[i]);
-			}
-		}
-	};
-
-	exports.default = Deck;
-
-/***/ },
-/* 180 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _card = __webpack_require__(181);
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var CardModel = function CardModel(suit, rank, symbol) {
-	  _classCallCheck(this, CardModel);
-
-	  this.suit = suit;
-	  this.symbol = symbol;
-	  this.rank = rank;
-	};
-
-	//In Deck, you'd create a new card let c = new Card('spade', diamond)
-
-
-	exports.default = CardModel;
-
-/***/ },
-/* 181 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var SUITS = [{ suit: "Spade", symbol: "♠️" }, { suit: "Club", symbol: "♣️" }, { suit: "Heart", symbol: "♥️" }, { suit: "Diamond", symbol: "♦️" }];
-
-	var RANKS = [{ name: 'ACE', value: 11 }, { name: '2', value: 2 }, { name: '3', value: 3 }, { name: '4', value: 4 }, { name: '5', value: 5 }, { name: '6', value: 6 }, { name: '7', value: 7 }, { name: '8', value: 8 }, { name: '9', value: 9 }, { name: '10', value: 10 }, { name: 'JACK', value: 10 }, { name: 'QUEEN', value: 10 }, { name: 'KING', value: 10 }];
-
-	var SUITS_TO_SYMBOL = {
-	  spade: "♠️",
-	  club: "♣️",
-	  heart: "♥️",
-	  diamond: "♦️"
-	};
-
-	var SUITS_TO_NAME = {
-	  spade: "SPADE",
-	  club: "CLUB",
-	  heart: "HEART",
-	  diamond: "DIAMOND"
-	};
-
-	//makes values accessible to other files
-	exports.default = SUITS;
-
-
-	module.exports = {
-	  SUITS_TO_NAME: SUITS_TO_NAME,
-	  SUITS_TO_SYMBOL: SUITS_TO_SYMBOL,
-	  SUITS: SUITS
-	};
-
-/***/ },
-/* 182 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _card = __webpack_require__(181);
-
-	var _card2 = _interopRequireDefault(_card);
-
-	var _deck = __webpack_require__(183);
-
-	var _deck2 = _interopRequireDefault(_deck);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Card = function (_Component) {
-	  _inherits(Card, _Component);
-
-	  function Card() {
-	    _classCallCheck(this, Card);
-
-	    return _possibleConstructorReturn(this, (Card.__proto__ || Object.getPrototypeOf(Card)).apply(this, arguments));
-	  }
-
-	  _createClass(Card, [{
-	    key: 'render',
-	    value: function render() {
-	      // const {card} = this.props
-	      return _react2.default.createElement('div', null);
-	    }
-	  }]);
-
-	  return Card;
-	}(_react.Component);
-
-	exports.default = Card;
-
-/***/ },
-/* 183 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _lodash = __webpack_require__(184);
+	var _lodash = __webpack_require__(180);
 
 	var _lodash2 = _interopRequireDefault(_lodash);
 
-	var _card = __webpack_require__(181);
-
-	var _card2 = _interopRequireDefault(_card);
-
-	var _rank = __webpack_require__(186);
-
-	var _rank2 = _interopRequireDefault(_rank);
+	var _card = __webpack_require__(182);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21729,42 +21628,82 @@
 		function Deck() {
 			_classCallCheck(this, Deck);
 
-			this.reset();
+			// this.reset()
+			this.createDeck = this.createDeck;
 		}
 
 		_createClass(Deck, [{
 			key: 'shuffle',
 			value: function shuffle() {
-				this.cards = _lodash2.default.shuffle(this.cards);
+				this.deck = _lodash2.default.shuffle(this.deck);
 			}
 		}, {
 			key: 'deal',
 			value: function deal() {
-				return this.cards.pop();
+				return this.deck.pop();
 			}
-		}, {
-			key: 'reset',
-			value: function reset() {
-				this.cards = _card2.default.map(function (suit) {
-					return _rank2.default.map(function (rank) {
-						return Object.assign({}, suit, rank);
-					});
-				}).reduce(function (memo, array) {
-					return memo.concat(array);
-				});
 
-				this.shuffle();
-			}
+			// reset(){
+			// 	this.cards = SUITS.map(suit =>
+			// 		RANKS.map(rank => Object.assign( {}, suit, rank ))
+			// 	).reduce( (memo, array) => memo.concat( array ))
+
+			// 	this.shuffle()
+			// }
+
 		}, {
 			key: 'createDeck',
 			value: function createDeck() {
 				var deck = [];
-				for (suit in _card2.default) {
-					for (rank in _rank2.default) {
-						var symbol = SUITS_TO_SYMBOL[suit];
-						//let card = {suit: {suit}, rank:{rank}, symbol:{symbol}}
+				var _iteratorNormalCompletion = true;
+				var _didIteratorError = false;
+				var _iteratorError = undefined;
+
+				try {
+					for (var _iterator = _card.SUITS[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+						var suit = _step.value;
+						var _iteratorNormalCompletion2 = true;
+						var _didIteratorError2 = false;
+						var _iteratorError2 = undefined;
+
+						try {
+							for (var _iterator2 = _card.RANKS[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+								var rank = _step2.value;
+
+								deck.push({ suit: suit.suit, rank: rank, symbol: suit.symbol });
+							}
+						} catch (err) {
+							_didIteratorError2 = true;
+							_iteratorError2 = err;
+						} finally {
+							try {
+								if (!_iteratorNormalCompletion2 && _iterator2.return) {
+									_iterator2.return();
+								}
+							} finally {
+								if (_didIteratorError2) {
+									throw _iteratorError2;
+								}
+							}
+						}
+					}
+					// console.log(deck)
+				} catch (err) {
+					_didIteratorError = true;
+					_iteratorError = err;
+				} finally {
+					try {
+						if (!_iteratorNormalCompletion && _iterator.return) {
+							_iterator.return();
+						}
+					} finally {
+						if (_didIteratorError) {
+							throw _iteratorError;
+						}
 					}
 				}
+
+				return _lodash2.default.shuffle(deck);
 			}
 		}]);
 
@@ -21774,7 +21713,7 @@
 	exports.default = Deck;
 
 /***/ },
-/* 184 */
+/* 180 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(global, module) {/**
@@ -38843,10 +38782,10 @@
 	  }
 	}.call(this));
 
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(185)(module)))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(181)(module)))
 
 /***/ },
-/* 185 */
+/* 181 */
 /***/ function(module, exports) {
 
 	module.exports = function(module) {
@@ -38862,17 +38801,389 @@
 
 
 /***/ },
-/* 186 */
+/* 182 */
 /***/ function(module, exports) {
+
+	"use strict";
+
+	var SUITS = [{ suit: "Spade", symbol: "♠️" }, { suit: "Club", symbol: "♣️" }, { suit: "Heart", symbol: "♥️" }, { suit: "Diamond", symbol: "♦️" }];
+
+	var RANKS = [{ name: 'ACE', value: 11 }, { name: '2', value: 2 }, { name: '3', value: 3 }, { name: '4', value: 4 }, { name: '5', value: 5 }, { name: '6', value: 6 }, { name: '7', value: 7 }, { name: '8', value: 8 }, { name: '9', value: 9 }, { name: '10', value: 10 }, { name: 'JACK', value: 10 }, { name: 'QUEEN', value: 10 }, { name: 'KING', value: 10 }];
+
+	// const SUITS_TO_SYMBOL = {
+	//   spade: "♠️",
+	//   club:  "♣️",
+	//   heart: "♥️",
+	//   diamond: "♦️"
+	// }
+
+	// const SUITS_TO_NAME = {
+	//   spade: "SPADE",
+	//   club: "CLUB",
+	//   heart: "HEART",
+	//   diamond: "DIAMOND"
+	// }
+
+
+	//makes values accessible to other files
+	// export default SUITS
+
+	module.exports = {
+			// SUITS_TO_NAME,
+			// SUITS_TO_SYMBOL,
+			SUITS: SUITS,
+			RANKS: RANKS
+	};
+
+/***/ },
+/* 183 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	var RANKS = [{ name: 'ACE', value: 11 }, { name: '2', value: 2 }, { name: '3', value: 3 }, { name: '4', value: 4 }, { name: '5', value: 5 }, { name: '6', value: 6 }, { name: '7', value: 7 }, { name: '8', value: 8 }, { name: '9', value: 9 }, { name: '10', value: 10 }, { name: 'JACK', value: 10 }, { name: 'QUEEN', value: 10 }, { name: 'KING', value: 10 }];
 
-	exports.default = RANKS;
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _card = __webpack_require__(184);
+
+	var _card2 = _interopRequireDefault(_card);
+
+	var _deck = __webpack_require__(179);
+
+	var _deck2 = _interopRequireDefault(_deck);
+
+	var _lodash = __webpack_require__(180);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Hand = function (_Component) {
+		_inherits(Hand, _Component);
+
+		function Hand(props) {
+			_classCallCheck(this, Hand);
+
+			var _this = _possibleConstructorReturn(this, (Hand.__proto__ || Object.getPrototypeOf(Hand)).call(this, props));
+
+			_this.hand = _this.props.hand || [];
+			return _this;
+		}
+
+		_createClass(Hand, [{
+			key: 'makeCard',
+			value: function makeCard() {
+				return this.hand.map(function (card, index) {
+					return _react2.default.createElement(_card2.default, _extends({ key: index }, card));
+				});
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement(
+					'div',
+					null,
+					' ',
+					this.makeCard(),
+					' '
+				);
+			}
+		}]);
+
+		return Hand;
+	}(_react.Component);
+
+	exports.default = Hand;
+
+/***/ },
+/* 184 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Card = function (_Component) {
+	  _inherits(Card, _Component);
+
+	  function Card(props) {
+	    _classCallCheck(this, Card);
+
+	    return _possibleConstructorReturn(this, (Card.__proto__ || Object.getPrototypeOf(Card)).call(this, props));
+	  }
+
+	  _createClass(Card, [{
+	    key: "render",
+	    value: function render() {
+	      var _props = this.props,
+	          name = _props.name,
+	          value = _props.value,
+	          suit = _props.suit,
+	          symbol = _props.symbol;
+
+	      return _react2.default.createElement(
+	        "div",
+	        { className: "card" },
+	        name,
+	        " ",
+	        suit,
+	        " ",
+	        symbol
+	      );
+	    }
+	  }]);
+
+	  return Card;
+	}(_react.Component);
+
+	exports.default = Card;
+
+/***/ },
+/* 185 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _deck = __webpack_require__(179);
+
+	var _deck2 = _interopRequireDefault(_deck);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var WIN = 'win';
+	var LOSE = 'lose';
+	var FAIL = 'fail';
+	var BLACKJACK = 'BLACKJACK';
+
+	var Game = function () {
+	  function Game() {
+	    _classCallCheck(this, Game);
+
+	    this.deck = new _deck2.default();
+	    this.players = [{ name: "dealer", hand: [], lowestHandValue: 0, highestHandValue: 0, stay: false, bestHandValue: 0 }, { name: "player", hand: [], lowestHandValue: 0, highestHandValue: 0, stay: false, bestHandValue: 0 }];
+
+	    this.deal();
+
+	    this.status = '';
+	    this.message = '';
+	    this.deal = this.deal;
+	  }
+
+	  _createClass(Game, [{
+	    key: 'deal',
+	    value: function deal() {
+	      var _this = this;
+
+	      var players = this.players,
+	          deck = this.deck;
+
+
+	      _.times(2, function () {
+	        players.forEach(function (player) {
+	          _this.hit(player);
+	        });
+	      });
+	      var player = this.players[1];
+	      var hand = player.hand;
+
+	      var isBlackJack = function isBlackJack(card) {
+	        return card.name === 'JACK' && (card.suit === 'Spade' || card.suit === 'Club');
+	      };
+
+	      if (hand.length === 2 && player.bestHandValue === 21 && (isBlackJack(hand[0]) || isBlackJack(hand[1]))) {
+	        this.status === BLACKJACK;
+	      }
+	      this.updateStatus();
+	    }
+	  }, {
+	    key: 'updateStatus',
+	    value: function updateStatus() {
+	      if (this.status === '') {
+	        this.message = '';
+	      } else if (this.status === BLACKJACK) {
+	        this.message = 'Ready to start blackjack?';
+	      } else if (this.status === FAIL) {
+	        this.message = 'Welp! No sympathy from me.';
+	      } else if (this.status === LOSE) {
+	        this.message = 'Sucks for you. You lose!';
+	      } else if (this.status === WIN) {
+	        this.message = 'You won the game!';
+	      }
+	    }
+	  }, {
+	    key: 'stay',
+	    value: function stay(player) {
+	      var hand = player.hand,
+	          stay = player.stay;
+
+	      var dealer = this.players[0];
+
+	      player.stay = true;
+
+	      if (player.bestHandValue < 21 && hand.length === 5) {
+	        this.status = WIN;
+	      } else if (dealer.bestHandValue >= player.bestHandValue && player.stay === true) {
+	        this.status = FAIL;
+	      } else {
+	        while (bestHandValue(dealer.hand) < 17 && bestHandValue(dealer.hand) < bestHandValue(player.hand)) {
+	          this.hit(dealer);
+	        }
+	      }
+
+	      if (dealer.bestHandValue < player.bestHandValue && player.stay === true) this.status = WIN;
+	      if (dealer.bestHandValue > player.bestHandValue && player.stay === true) this.status = LOSE;
+	      if (dealer.bestHandValue > 21) this.status = WIN;
+	      if (dealer.bestHandValue === player.bestHandValue) this.status = LOSE;
+
+	      this.updateStatus();
+	    }
+	  }, {
+	    key: 'hit',
+	    value: function hit(player) {
+	      var hand = player.hand,
+	          stay = player.stay;
+
+	      var dealer = this.players[0];
+
+	      if (player.lowestHandValue < 21) hand.push(this.deck.deal());
+
+	      player.lowestHandValue = lowestHandValue(hand);
+	      player.highestHandValue = highestHandValue(hand);
+	      player.bestHandValue = bestHandValue(hand);
+
+	      if (player.bestHandValue > 21) this.status = LOSE;
+	      if (player.bestHandValue) this.updateStatus();
+	    }
+	  }]);
+
+	  return Game;
+	}();
+
+	exports.default = Game;
+
+
+	var lowestHandValue = function lowestHandValue(hand) {
+	  return hand.reduce(function (total, card) {
+	    if (card.name === 'ACE') return total + 1;
+	    return total + card.value;
+	  }, 0);
+	};
+
+	var highestHandValue = function highestHandValue(hand) {
+	  return hand.reduce(function (total, card) {
+	    return total + card.value;
+	  }, 0);
+	};
+
+	var bestHandValue = function bestHandValue(hand) {
+	  var handValue = highestHandValue(hand);
+	  var numAces = hand.filter(function (card) {
+	    return card.name === "ACE";
+	  }).length;
+	  while (handValue > 21 && numAces > 0) {
+	    handValue -= 10;
+	    numAces -= 1;
+	  }
+	  return handValue;
+	};
+
+/***/ },
+/* 186 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _hand = __webpack_require__(183);
+
+	var _hand2 = _interopRequireDefault(_hand);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Player = function (_Component) {
+		_inherits(Player, _Component);
+
+		function Player(props) {
+			_classCallCheck(this, Player);
+
+			var _this = _possibleConstructorReturn(this, (Player.__proto__ || Object.getPrototypeOf(Player)).call(this, props));
+
+			_this.player = _this.props.player;
+			return _this;
+		}
+
+		_createClass(Player, [{
+			key: 'player',
+			value: function player() {
+				this.player = hand;
+				return;
+				console.log(this.player);
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement('div', null);
+			}
+		}]);
+
+		return Player;
+	}(_react.Component);
+
+	exports.default = Player;
 
 /***/ }
 /******/ ]);

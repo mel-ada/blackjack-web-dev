@@ -1,15 +1,18 @@
 import React, {Component} from 'react'
-import SUITS from "../client/card"
-import Deck from '../client/deck'
 
-class Card extends Component {
+export default class Card extends Component {
+	constructor(props) {
+	  super(props)	
+	}
 
     render() {
-      // const {card} = this.props
+      const {name, value, suit, symbol} = this.props
       return (
-      	<div></div>
+      	<div className="card">
+      		{name} {suit} {symbol}
+      	</div>
       )
     }
 }
 
-export default Card
+
