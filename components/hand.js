@@ -10,7 +10,7 @@ export default class Hand extends Component {
 	  this.hand = this.props.hand || []
 	  // console.log(this.cardVal())
 	}
-	makeCard() {	
+	makeCard() {
 	  return this.hand.map((card, index) => <Card key={index} {...card}/>)
 	}
 	

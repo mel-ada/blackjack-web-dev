@@ -16,7 +16,11 @@ export default class Button extends Component {
     this.state = {
       hand: []
     }
+  }
+
+  componentWillMount() {
     this.hit = this.hit
+    // this.makeHand = this.makeHand
   }
 
   makeHand(){
@@ -24,9 +28,9 @@ export default class Button extends Component {
     this.deck.forEach(card => {
       if(hand.length < 2) {
         hand.push(this.deck.pop())
+        this.setState({hand})
       } 
     })
-    this.setState({hand: hand})
     return hand
   }
 
@@ -39,27 +43,30 @@ export default class Button extends Component {
   hit(){
     const hand = this.state.hand.push(this.deck.pop())
     console.log('this is the state', hand)
-    this.setState({hand: hand})
+    // this.setState({hand})
   }
 
-  switch(){
+  // switch(){
 
-  }
+  // }
 
   render() {
     return (
       <div>
-       <button
+      <h1>Welcome to BlackJack!</h1>
+      <h4>Dealer's Hand</h4>
+      <Hand hand={this.makeHand()} />
+      <img id="corner" src="../images/backOfCard.jpeg"/>
+      <h4>Player's Hand</h4>
+      <Hand hand={this.makeHand()} /> 
+             <button
           className="btn btn-default"
           style={buttonStyle}
-          onClick={this.hit}>Hit</button>
+          onClick={this.hit.bind(this)}>Hit</button>
        <button
           className="btn btn-default"
           style={buttonStyle}
           onClick={this.props.handleClick}>Stay</button>
-      <Hand hand={this.makeHand()} />
-      <img id="corner" src="../images/backOfCard.jpeg"/>
-      <Hand hand={this.makeHand()} /> 
 
       </div>
     );

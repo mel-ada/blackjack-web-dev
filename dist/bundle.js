@@ -21527,11 +21527,16 @@
 	    _this.state = {
 	      hand: []
 	    };
-	    _this.hit = _this.hit;
 	    return _this;
 	  }
 
 	  _createClass(Button, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      this.hit = this.hit;
+	      // this.makeHand = this.makeHand
+	    }
+	  }, {
 	    key: 'makeHand',
 	    value: function makeHand() {
 	      var _this2 = this;
@@ -21540,9 +21545,9 @@
 	      this.deck.forEach(function (card) {
 	        if (hand.length < 2) {
 	          hand.push(_this2.deck.pop());
+	          _this2.setState({ hand: hand });
 	        }
 	      });
-	      this.setState({ hand: hand });
 	      return hand;
 	    }
 
@@ -21558,11 +21563,13 @@
 	    value: function hit() {
 	      var hand = this.state.hand.push(this.deck.pop());
 	      console.log('this is the state', hand);
-	      this.setState({ hand: hand });
+	      // this.setState({hand})
 	    }
-	  }, {
-	    key: 'switch',
-	    value: function _switch() {}
+
+	    // switch(){
+
+	    // }
+
 	  }, {
 	    key: 'render',
 	    value: function render() {
@@ -21570,11 +21577,29 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          'Welcome to BlackJack!'
+	        ),
+	        _react2.default.createElement(
+	          'h4',
+	          null,
+	          'Dealer\'s Hand'
+	        ),
+	        _react2.default.createElement(_hand2.default, { hand: this.makeHand() }),
+	        _react2.default.createElement('img', { id: 'corner', src: '../images/backOfCard.jpeg' }),
+	        _react2.default.createElement(
+	          'h4',
+	          null,
+	          'Player\'s Hand'
+	        ),
+	        _react2.default.createElement(_hand2.default, { hand: this.makeHand() }),
+	        _react2.default.createElement(
 	          'button',
 	          {
 	            className: 'btn btn-default',
 	            style: buttonStyle,
-	            onClick: this.hit },
+	            onClick: this.hit.bind(this) },
 	          'Hit'
 	        ),
 	        _react2.default.createElement(
@@ -21584,10 +21609,7 @@
 	            style: buttonStyle,
 	            onClick: this.props.handleClick },
 	          'Stay'
-	        ),
-	        _react2.default.createElement(_hand2.default, { hand: this.makeHand() }),
-	        _react2.default.createElement('img', { id: 'corner', src: '../images/backOfCard.jpeg' }),
-	        _react2.default.createElement(_hand2.default, { hand: this.makeHand() })
+	        )
 	      );
 	    }
 	  }]);
