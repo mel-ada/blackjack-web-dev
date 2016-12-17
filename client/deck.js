@@ -1,5 +1,6 @@
 import _ from 'lodash'
 import {SUITS, RANKS} from './card'
+import Hand from '../components/hand'
 
 export default class Deck {
 	constructor(){
@@ -23,11 +24,15 @@ export default class Deck {
 	// 	this.shuffle()
 	// }
 
+	// numVal(){
+	// 	return card.rank.value
+	// }
+
 	createDeck(){
 		const deck = []
 		for(let suit of SUITS){
 		  for(let rank of RANKS){
-			deck.push({suit: suit.suit, rank: rank, symbol: suit.symbol})
+			deck.push({suit: suit.suit, rank: rank, name: rank.name, value: rank.value, symbol: suit.symbol})
 		  }
 
 		}

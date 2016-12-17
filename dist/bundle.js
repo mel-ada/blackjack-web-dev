@@ -21524,34 +21524,52 @@
 	    var _this = _possibleConstructorReturn(this, (Button.__proto__ || Object.getPrototypeOf(Button)).call(this, props));
 
 	    _this.deck = new _deck2.default().createDeck();
+	    _this.state = {
+	      hand: []
+	    };
 	    return _this;
 	  }
 
 	  _createClass(Button, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      this.hit = this.hit;
+	      // this.makeHand = this.makeHand
+	    }
+	  }, {
 	    key: 'makeHand',
 	    value: function makeHand() {
+	      var _this2 = this;
+
 	      var hand = [];
 	      this.deck.forEach(function (card) {
 	        if (hand.length < 2) {
-	          hand.push(card);
+	          hand.push(_this2.deck.pop());
+	          _this2.setState({ hand: hand });
 	        }
 	      });
 	      return hand;
 	    }
-	  }, {
-	    key: 'makePlayer',
-	    value: function makePlayer() {
-	      var player1 = [];
-	    }
+
+	    // makePlayer(){
+	    //   const player1 = []
+	    //   player1.push()
+	    //   console.log(player1)
+
+	    // }
+
 	  }, {
 	    key: 'hit',
 	    value: function hit() {
-	      //give player one more card
-	      //update hand value 
+	      var hand = this.state.hand.push(this.deck.pop());
+	      console.log('this is the state', hand);
+	      // this.setState({hand})
 	    }
-	  }, {
-	    key: 'switch',
-	    value: function _switch() {}
+
+	    // switch(){
+
+	    // }
+
 	  }, {
 	    key: 'render',
 	    value: function render() {
@@ -21559,11 +21577,29 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          'Welcome to BlackJack!'
+	        ),
+	        _react2.default.createElement(
+	          'h4',
+	          null,
+	          'Dealer\'s Hand'
+	        ),
+	        _react2.default.createElement(_hand2.default, { hand: this.makeHand() }),
+	        _react2.default.createElement('img', { id: 'corner', src: '../images/backOfCard.jpeg' }),
+	        _react2.default.createElement(
+	          'h4',
+	          null,
+	          'Player\'s Hand'
+	        ),
+	        _react2.default.createElement(_hand2.default, { hand: this.makeHand() }),
+	        _react2.default.createElement(
 	          'button',
 	          {
 	            className: 'btn btn-default',
 	            style: buttonStyle,
-	            onClick: this.props.handleClick },
+	            onClick: this.hit.bind(this) },
 	          'Hit'
 	        ),
 	        _react2.default.createElement(
@@ -21573,26 +21609,7 @@
 	            style: buttonStyle,
 	            onClick: this.props.handleClick },
 	          'Stay'
-	        ),
-	        _react2.default.createElement('img', { src: '../images/backOfCard.jpeg' }),
-	        _react2.default.createElement(
-	          'button',
-	          {
-	            className: 'btn btn-default',
-	            style: buttonStyle,
-	            onClick: this.props.handleClick },
-	          'Play'
-	        ),
-	        _react2.default.createElement(
-	          'button',
-	          {
-	            className: 'btn btn-default',
-	            style: buttonStyle,
-	            onClick: this.props.handleClick },
-	          'New Game'
-	        ),
-	        _react2.default.createElement(_hand2.default, { hand: this.makeHand() }),
-	        _react2.default.createElement(_player2.default, { player: this.makePlayer() })
+	        )
 	      );
 	    }
 	  }]);
@@ -21619,6 +21636,10 @@
 	var _lodash2 = _interopRequireDefault(_lodash);
 
 	var _card = __webpack_require__(182);
+
+	var _hand = __webpack_require__(183);
+
+	var _hand2 = _interopRequireDefault(_hand);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21651,6 +21672,10 @@
 			// 	this.shuffle()
 			// }
 
+			// numVal(){
+			// 	return card.rank.value
+			// }
+
 		}, {
 			key: 'createDeck',
 			value: function createDeck() {
@@ -21670,7 +21695,7 @@
 							for (var _iterator2 = _card.RANKS[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
 								var rank = _step2.value;
 
-								deck.push({ suit: suit.suit, rank: rank, symbol: suit.symbol });
+								deck.push({ suit: suit.suit, rank: rank, name: rank.name, value: rank.value, symbol: suit.symbol });
 							}
 						} catch (err) {
 							_didIteratorError2 = true;
@@ -38808,29 +38833,9 @@
 
 	var SUITS = [{ suit: "Spade", symbol: "♠️" }, { suit: "Club", symbol: "♣️" }, { suit: "Heart", symbol: "♥️" }, { suit: "Diamond", symbol: "♦️" }];
 
-	var RANKS = [{ name: 'ACE', value: 11 }, { name: '2', value: 2 }, { name: '3', value: 3 }, { name: '4', value: 4 }, { name: '5', value: 5 }, { name: '6', value: 6 }, { name: '7', value: 7 }, { name: '8', value: 8 }, { name: '9', value: 9 }, { name: '10', value: 10 }, { name: 'JACK', value: 10 }, { name: 'QUEEN', value: 10 }, { name: 'KING', value: 10 }];
-
-	// const SUITS_TO_SYMBOL = {
-	//   spade: "♠️",
-	//   club:  "♣️",
-	//   heart: "♥️",
-	//   diamond: "♦️"
-	// }
-
-	// const SUITS_TO_NAME = {
-	//   spade: "SPADE",
-	//   club: "CLUB",
-	//   heart: "HEART",
-	//   diamond: "DIAMOND"
-	// }
-
-
-	//makes values accessible to other files
-	// export default SUITS
+	var RANKS = [{ name: 'Ace', value: 11 }, { name: '2', value: 2 }, { name: '3', value: 3 }, { name: '4', value: 4 }, { name: '5', value: 5 }, { name: '6', value: 6 }, { name: '7', value: 7 }, { name: '8', value: 8 }, { name: '9', value: 9 }, { name: '10', value: 10 }, { name: 'Jack', value: 10 }, { name: 'Queen', value: 10 }, { name: 'King', value: 10 }];
 
 	module.exports = {
-			// SUITS_TO_NAME,
-			// SUITS_TO_SYMBOL,
 			SUITS: SUITS,
 			RANKS: RANKS
 	};
@@ -38882,6 +38887,7 @@
 			var _this = _possibleConstructorReturn(this, (Hand.__proto__ || Object.getPrototypeOf(Hand)).call(this, props));
 
 			_this.hand = _this.props.hand || [];
+			// console.log(this.cardVal())
 			return _this;
 		}
 
@@ -38891,6 +38897,75 @@
 				return this.hand.map(function (card, index) {
 					return _react2.default.createElement(_card2.default, _extends({ key: index }, card));
 				});
+			}
+		}, {
+			key: 'handVal',
+			value: function handVal() {
+				var handValue = 0;
+				var _iteratorNormalCompletion = true;
+				var _didIteratorError = false;
+				var _iteratorError = undefined;
+
+				try {
+					for (var _iterator = this.hand[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+						var card = _step.value;
+
+						handValue += card.rank.value;
+						console.log(card);
+					}
+				} catch (err) {
+					_didIteratorError = true;
+					_iteratorError = err;
+				} finally {
+					try {
+						if (!_iteratorNormalCompletion && _iterator.return) {
+							_iterator.return();
+						}
+					} finally {
+						if (_didIteratorError) {
+							throw _iteratorError;
+						}
+					}
+				}
+
+				return handValue;
+			}
+		}, {
+			key: 'cardVal',
+			value: function cardVal() {
+				var cardValue = [];
+				var _iteratorNormalCompletion2 = true;
+				var _didIteratorError2 = false;
+				var _iteratorError2 = undefined;
+
+				try {
+					for (var _iterator2 = this.hand[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+						var card = _step2.value;
+
+						cardValue.push(card.rank.value);
+						console.log(card);
+					}
+				} catch (err) {
+					_didIteratorError2 = true;
+					_iteratorError2 = err;
+				} finally {
+					try {
+						if (!_iteratorNormalCompletion2 && _iterator2.return) {
+							_iterator2.return();
+						}
+					} finally {
+						if (_didIteratorError2) {
+							throw _iteratorError2;
+						}
+					}
+				}
+
+				return cardValue;
+			}
+		}, {
+			key: 'isBust',
+			value: function isBust() {
+				return this.handVal() > 21;
 			}
 		}, {
 			key: 'render',
@@ -39128,62 +39203,28 @@
 
 /***/ },
 /* 186 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	'use strict';
+	// import React, {Component} from 'react'
+	// import Hand from './hand'
 
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
+	// export default class Player extends Component {
+	// 	 constructor(props) {
+	// 	 	super(props)
+	// 	 	// this.player = this.props.player 
+	// 	 }
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	// 	 player() {
+	// 	 	this.player = hand
+	// 	 	return 
+	// 	 	console.log(this.player)
+	// 	 }
 
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _hand = __webpack_require__(183);
-
-	var _hand2 = _interopRequireDefault(_hand);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Player = function (_Component) {
-		_inherits(Player, _Component);
-
-		function Player(props) {
-			_classCallCheck(this, Player);
-
-			var _this = _possibleConstructorReturn(this, (Player.__proto__ || Object.getPrototypeOf(Player)).call(this, props));
-
-			_this.player = _this.props.player;
-			return _this;
-		}
-
-		_createClass(Player, [{
-			key: 'player',
-			value: function player() {
-				this.player = hand;
-				return;
-				console.log(this.player);
-			}
-		}, {
-			key: 'render',
-			value: function render() {
-				return _react2.default.createElement('div', null);
-			}
-		}]);
-
-		return Player;
-	}(_react.Component);
-
-	exports.default = Player;
+	// 	 render() {
+	// 	 	return <div></div>
+	// 	 }
+	// }
+	"use strict";
 
 /***/ }
 /******/ ]);
