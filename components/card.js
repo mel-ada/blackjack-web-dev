@@ -9,7 +9,7 @@ export default class Card extends Component {
       const {name, value, suit, symbol} = this.props
       return (
       	<div className="card">
-      		{name} {suit} {symbol}
+      		{name} {suit} {symbol} 
       	</div>
       )
     }
